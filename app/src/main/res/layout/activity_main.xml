@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground1"
+    android:padding="15dp"
+    tools:context=".MainActivity">
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/commandCenterView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start"
+                    android:padding="5dp"
+                    android:text="@string/status_active_neutral"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/boundedDevicesList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/list_view_model">
+
+            </ListView>
+
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/discoverBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/scan_btn_background"
+                    android:onClick="enableDiscoverability"
+                    android:padding="10dp"
+                    android:text="@string/enable_discoverability"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:ignore="UsingOnClickInXml" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/notFoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_devices_found"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chatLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/statusBarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/chatClientName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/target_matrix"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/disconnectBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="disconnectTheChat"
+                android:padding="5dp"
+                android:text="@string/disconnect"
+                android:textSize="12sp"
+                tools:ignore="UsingOnClickInXml" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="@color/teal_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/statusBarView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/statusBarView"
+            app:layout_constraintTop_toBottomOf="@+id/statusBarView"
+            app:layout_constraintVertical_bias="0.050000012" />
+
+        <ListView
+            android:id="@+id/chatListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="20dp"
+            android:transcriptMode="alwaysScroll"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            tools:listitem="@layout/message_list_view_model" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <EditText
+                android:id="@+id/enteredMsg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/chat_box_background"
+                android:ems="10"
+                android:hint="@string/enter_message"
+                android:inputType="textNoSuggestions"
+                android:padding="15dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#777777"
+                android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/recordbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:drawingCacheQuality="auto"
+                android:gravity="center"
+                android:onClick="onRecordButtonClick"
+                android:padding="8dp"
+                android:text="Start Rec"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                tools:ignore="UsingOnClickInXml" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/sendMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:drawableStart="@drawable/ic_baseline_send_24"
+                android:drawingCacheQuality="auto"
+                android:gravity="center"
+                android:onClick="sendMsgToUserBtn"
+                android:padding="8dp"
+                android:text="send"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                tools:ignore="UsingOnClickInXml" />
+        </LinearLayout>
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="4"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Number Buttons -->
+            <!-- Add your number buttons here -->
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="1" />
+
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/buttonStar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="*" />
+
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onNumberButtonClick"
+                android:text="0" />
+
+
+            <Button
+                android:id="@+id/buttonBackspace"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/scan_btn_background"
+                android:onClick="onBackspaceButtonClick"
+                android:text="&#9003;"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </GridLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
